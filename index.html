@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Từ vựng TOEIC - Danh từ - Lớp Anh thầy Kết</title>
+<title>Từ vựng bài học- Lớp Anh thầy Kết</title>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
 <style>
@@ -311,6 +311,58 @@ select {
     flex:1;
 }
 
+/* ===== ẨN / HIỆN NGHĨA TỪ VỰNG ===== */
+
+
+.word-list.hide-all-meanings .vn-word {
+    visibility: hidden !important;
+}
+
+/* Từ nào được click để hiện riêng thì hiện lên */
+.word-list.hide-all-meanings .vn-word.show-individual {
+    visibility: visible !important;
+}
+
+.en-word {
+    cursor: pointer;
+}
+
+.en-word:hover {
+    color: #d66b5d;
+}
+
+.en-word {
+    cursor: pointer;
+}
+
+.en-word:hover {
+    color: #d66b5d;
+}
+
+.toggle-meaning-box {
+    width: 85%;
+    margin: 20px auto -5px auto;
+    text-align: left;
+}
+
+#toggleMeaningBtn {
+    background: #ffd6ba;
+    color: #7a4e3e;
+    border: 2px solid #f3b28f;
+    border-radius: 10px;
+    padding: 10px 18px;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all .2s ease;
+}
+
+#toggleMeaningBtn:hover {
+    background: #ffb3ba;
+    transform: translateY(-1px);
+}
+
+
 @media (max-width:768px){
 
   .word-text{
@@ -352,7 +404,7 @@ select {
 
 <header>
   <div class="header-left">
-    <a href="https://ketng91.github.io/TuvungTHPTQG-homepage/">
+    <a href="">
       <i class="fa-solid fa-house"></i> Lớp Anh thầy Kết
     </a>
   </div>
@@ -409,6 +461,13 @@ select {
     <source src="" type="audio/mpeg">
   </audio>
 
+</div>
+
+<!-- NÚT HIỆN / ẨN NGHĨA -->
+<div class="toggle-meaning-box">
+  <button id="toggleMeaningBtn" onclick="toggleAllMeanings()">
+    🙈 Ẩn nghĩa
+  </button>
 </div>
 
 
@@ -2015,6 +2074,10 @@ let totalWords = 0;
 let knownCount = 0;
 
 let reviewMode = "vn-en";
+
+// Tr?ng thái Hi?n / ?n ngh?a
+let meaningsVisible = true;
+
 /********** LOAD LIST **********/
 function loadList(){
 
@@ -2038,7 +2101,7 @@ function loadList(){
 
 function updateCounter(){
   document.getElementById("progressCounter").innerText =
-    `Đã biết ${knownCount} / ${totalWords}`;
+    `?ã bi?t ${knownCount} / ${totalWords}`;
 }
 function setMode(mode){
 
@@ -2069,10 +2132,10 @@ function speakWord(text){
 
   let cleanText = text;
 
-  // bỏ phiên âm /.../
+  // b? phiên âm /.../
   cleanText = cleanText.split("/")[0];
 
-  // bỏ loại từ (n), (v), (adj), (phr v)...
+  // b? lo?i t? (n), (v), (adj), (phr v)...
   cleanText = cleanText.replace(/\(.*?\)/g,"").trim();
 
   const utter = new SpeechSynthesisUtterance(cleanText);
@@ -2089,7 +2152,17 @@ function speakWord(text){
 function renderWords(){
 
   const box = document.getElementById("wordContainer");
+
   box.innerHTML = "";
+
+  // N?u ?ang ? ch? ?? ?n ngh?a
+  // thì danh sách m?i c?ng ph?i ?n ngh?a
+  if (!meaningsVisible) {
+      box.classList.add("hide-all-meanings");
+  } else {
+      box.classList.remove("hide-all-meanings");
+  }
+
 
   let sorted = [...data[currList]].sort((a,b)=>b.tick - a.tick);
 
@@ -2100,32 +2173,108 @@ function renderWords(){
     box.innerHTML += `
       <div class="word-row">
 
-<span class="word-text">
+        <span class="word-text">
 
-  <span class="en-word">
-    ${item.en}:
-  </span>
+          <span 
+            class="en-word"
+            onclick="toggleOneMeaning(this)"
+            title="Click ?? hi?n / ?n ngh?a"
+          >
+            ${item.en}:
+          </span>
 
-  <span class="vn-word">
-    ${item.vn}
-  </span>
+          <span class="vn-word">
+            ${item.vn}
+          </span>
 
-  <i class="fa-solid fa-volume-high speaker-icon"
-     onclick="event.stopPropagation();speakWord(\`${item.en}\`)">
-  </i>
+          <i class="fa-solid fa-volume-high speaker-icon"
+             onclick="event.stopPropagation();speakWord(\`${item.en}\`)">
+          </i>
 
-</span>
+        </span>
 
         <input
           type="checkbox"
           ${item.tick ? "checked" : ""}
-          onclick="toggleTick(${realIndex})">
+          onclick="event.stopPropagation(); toggleTick(${realIndex})">
 
       </div>
     `;
   });
 
 }
+
+/********** HI?N / ?N NGH?A **********/
+
+// Nút Hi?n / ?n toàn b? ngh?a
+function toggleAllMeanings() {
+
+    const wordList = document.getElementById("wordContainer");
+    const button = document.getElementById("toggleMeaningBtn");
+    const meanings = wordList.querySelectorAll(".vn-word");
+
+    meaningsVisible = !meaningsVisible;
+
+    if (meaningsVisible) {
+
+        // HI?N T?T C?
+        wordList.classList.remove("hide-all-meanings");
+
+        meanings.forEach(word => {
+            word.classList.remove("show-individual");
+            word.style.visibility = "visible";
+        });
+
+        button.innerHTML = "?? ?n ngh?a";
+
+    } else {
+
+        // ?N T?T C?
+        wordList.classList.add("hide-all-meanings");
+
+        meanings.forEach(word => {
+            word.classList.remove("show-individual");
+            word.style.visibility = "";
+        });
+
+        button.innerHTML = "??? Hi?n ngh?a";
+    }
+}
+
+
+// Click t?ng t? ti?ng Anh
+function toggleOneMeaning(enWord) {
+
+    const vnWord = enWord.nextElementSibling;
+
+    if (!vnWord) return;
+
+
+    // N?u ?ang ?N TOÀN B?
+    // click t? nào thì hi?n riêng ngh?a t? ?ó
+    if (!meaningsVisible) {
+
+        vnWord.classList.toggle("show-individual");
+
+    } 
+    
+    // N?u ?ang HI?N TOÀN B?
+    // click t? nào thì ?n / hi?n riêng t? ?ó
+    else {
+
+        if (vnWord.style.visibility === "hidden") {
+
+            vnWord.style.visibility = "visible";
+
+        } else {
+
+            vnWord.style.visibility = "hidden";
+
+        }
+
+    }
+}
+
 /********** TICK UPDATE **********/
 function toggleTick(realIndex){
   data[currList][realIndex].tick = !data[currList][realIndex].tick;
@@ -2136,7 +2285,7 @@ function toggleTick(realIndex){
 function nextWord(){
   document.getElementById("answer").innerHTML="";
   if(listCopy.length===0){
-    document.getElementById("vietWord").innerHTML="🎉 Bạn đã học xong hết!";
+    document.getElementById("vietWord").innerHTML="?? B?n ?ã h?c xong h?t!";
     return;
   }
   index=Math.floor(Math.random()*listCopy.length);
@@ -2199,12 +2348,12 @@ function checkEx(i){
   const box = document.getElementById("res"+i);
 
   if(user === ans) {
-    box.innerHTML = "✔ Correct";
-    box.style.color = "#28a745"; // chữ Correct màu xanh lá
-    firework(); // gọi pháo hoa
+    box.innerHTML = "? Correct";
+    box.style.color = "#28a745"; // ch? Correct màu xanh lá
+    firework(); // g?i pháo hoa
   } else {
-    box.innerHTML = "✘ " + exercises[currList][i].a;
-    box.style.color = "#D02752"; // chữ sai màu đỏ
+    box.innerHTML = "? " + exercises[currList][i].a;
+    box.style.color = "#D02752"; // ch? sai màu ??
   }
 }
 
