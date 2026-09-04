@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Từ vựng bài học - Lớp Anh thầy Kết</title>
+<title>Từ vựng bài học- Lớp Anh thầy Kết</title>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
 <style>
@@ -23,7 +23,7 @@
   display: flex;
   flex-wrap: wrap;       
   align-items: center;
-  justify-content: space-between;  /* Left luôn bên trái, center c?n gi?a */
+  justify-content: space-between;  /* Left luôn bên trái, center căn giữa */
   gap: 15px;
 }
 
@@ -32,7 +32,7 @@
   display: flex;
   align-items: center;
   gap: 8px;
-  flex: 0 0 auto;          /* không b? co l?i */
+  flex: 0 0 auto;          /* không bị co lại */
 }
 
 .header-left a {
@@ -91,7 +91,7 @@ select {
 
 
 
-/* MEDIA QUERY cho ?i?n tho?i */
+/* MEDIA QUERY cho điện thoại */
 @media (max-width: 480px) {
 
   .header-center {
@@ -107,7 +107,7 @@ select {
     order: 1;
   }
 
-  /* Lesson + Audio xu?ng hàng trên ?i?n tho?i */
+  /* Lesson + Audio xuống hàng trên điện thoại */
   .top-bar{
     flex-direction: column;
     align-items: stretch;
@@ -174,13 +174,13 @@ select {
 }
 .word-row:last-child { border-bottom: none; }
 
-/* Hover ??i màu */
+/* Hover đổi màu */
 .word-row:hover {
-  background-color: #fffacd; /* xanh nh?t d? th?y */
+  background-color: #fffacd; /* xanh nhạt dễ thấy */
   cursor: pointer;
 }
 
-  /* Ôn t?p */
+  /* Ôn tập */
   .review-box {
     margin: 40px auto;
     width: 70%;
@@ -212,7 +212,7 @@ select {
 }
 
 
-  /* Bài t?p */
+  /* Bài tập */
   .exercise {
     width: 80%;
     margin: 0 auto 30px auto;
@@ -302,7 +302,7 @@ select {
 }
 
 .en-word{
-    width:420px;      /* ch?nh t?ng gi?m */
+    width:420px;      /* chỉnh tăng giảm */
     flex-shrink:0;
     font-weight:600;
 }
@@ -311,14 +311,14 @@ select {
     flex:1;
 }
 
-/* ===== ?N / HI?N NGH?A T? V?NG ===== */
+/* ===== ẨN / HIỆN NGHĨA TỪ VỰNG ===== */
 
 
 .word-list.hide-all-meanings .vn-word {
     visibility: hidden !important;
 }
 
-/* T? nào ???c click ?? hi?n riêng thì hi?n lên */
+/* Từ nào được click để hiện riêng thì hiện lên */
 .word-list.hide-all-meanings .vn-word.show-individual {
     visibility: visible !important;
 }
@@ -401,7 +401,7 @@ select {
 
 css
 /* =========================================================
-   ?? FROG VOCABULARY GAME
+   🐸 FROG VOCABULARY GAME
    ========================================================= */
 
 .frog-game-section {
@@ -447,7 +447,7 @@ css
   box-shadow: 0 12px 35px rgba(69,120,91,.18);
 }
 
-/* ánh sáng m?t n??c */
+/* ánh sáng mặt nước */
 .frog-game::before {
   content: "";
   position: absolute;
@@ -458,7 +458,7 @@ css
   pointer-events: none;
 }
 
-/* B?t n??c */
+/* Bọt nước */
 .water-bubble {
   position: absolute;
   width: 10px;
@@ -514,7 +514,7 @@ css
   box-shadow: 0 4px 12px rgba(0,0,0,.08);
 }
 
-/* ngh?a ti?ng Vi?t */
+/* nghĩa tiếng Việt */
 .frog-question {
   position: absolute;
   z-index: 15;
@@ -533,22 +533,22 @@ css
   box-shadow: 0 7px 20px rgba(58,107,78,.15);
 }
 
-/* Khu v?c ru?i */
+/* Khu vực ruồi */
 .fly-zone {
   position: absolute;
   inset: 125px 20px 150px;
 }
 
-/* RU?I */
+/* RUỒI */
 .vocab-fly {
   position: absolute;
   z-index: 10;
 
-  /* Toàn b? b?ng là vùng click */
+  /* Toàn bộ bảng là vùng click */
   cursor: pointer;
   user-select: none;
 
-  /* Không cho double tap trên ?i?n tho?i */
+  /* Không cho double tap trên điện thoại */
   touch-action: manipulation;
 
   transition:
@@ -558,14 +558,14 @@ css
   animation: flyMove 4s ease-in-out infinite alternate;
 }
 
-/* Rê chu?t vào ? n?i lên */
+/* Rê chuột vào → nổi lên */
 .vocab-fly:hover {
   transform: scale(1.12);
   filter: brightness(1.06);
   z-index: 30;
 }
 
-/* Làm rõ ?ây là m?t nút */
+/* Làm rõ đây là một nút */
 .vocab-fly:active {
   transform: scale(.96);
 }
@@ -577,11 +577,11 @@ css
 .fly-body {
   position: relative;
 
-  /* Kích th??c b?ng v?a ph?i */
+  /* Kích thước bảng vừa phải */
   min-width: 120px;
   max-width: 180px;
 
-  /* Toàn b? b?ng là nút */
+  /* Toàn bộ bảng là nút */
   padding: 11px 15px;
 
   background: rgba(255,255,255,.95);
@@ -599,8 +599,8 @@ css
   box-shadow:
     0 5px 13px rgba(0,0,0,.14);
 
-  /* R?t quan tr?ng:
-     vùng click bao ph? toàn b?ng */
+  /* Rất quan trọng:
+     vùng click bao phủ toàn bảng */
   box-sizing: border-box;
 }
 
@@ -627,7 +627,7 @@ css
   transform: rotate(25deg);
 }
 
-/* icon ru?i */
+/* icon ruồi */
 .fly-face {
   font-size: 25px;
   display: block;
@@ -635,7 +635,7 @@ css
   pointer-events: none;
 }
 
-/* Các v? trí ban ??u */
+/* Các vị trí ban đầu */
 .fly-0 {
   left: 5%;
   top: 8%;
@@ -681,7 +681,7 @@ css
   }
 }
 
-/* ?CH */
+/* ẾCH */
 .frog-character {
   position: absolute;
   z-index: 25;
@@ -719,7 +719,7 @@ css
   clip-path: polygon(0 50%,100% 0,100% 100%);
 }
 
-/* thân ?ch */
+/* thân ếch */
 .frog-body {
   position: absolute;
   bottom: 30px;
@@ -733,7 +733,7 @@ css
   box-shadow: inset -8px -8px rgba(48,107,57,.15);
 }
 
-/* m?t */
+/* mắt */
 .frog-eye {
   position: absolute;
   top: -25px;
@@ -763,7 +763,7 @@ css
   top: 9px;
 }
 
-/* mi?ng */
+/* miệng */
 .frog-mouth {
   position: absolute;
   z-index: 10;
@@ -775,7 +775,7 @@ css
   top: 38px;
 }
 
-/* l??i */
+/* lưỡi */
 .frog-tongue {
   position: absolute;
   z-index: 50;
@@ -801,7 +801,7 @@ css
 }
 
 
-/* ?CH l?n nh? */
+/* ẾCH lớn nhỏ */
 .frog-character.grow1 {
   transform: translateX(-50%) scale(1.08);
 }
@@ -967,7 +967,7 @@ css
 }
 
 .vocab-fly {
-  /* vùng nút ?? l?n ?? ngón tay d? b?m */
+  /* vùng nút đủ lớn để ngón tay dễ bấm */
   min-height: 55px;
 }
 
